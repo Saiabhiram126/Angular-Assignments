@@ -1,0 +1,69 @@
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>Add New Employee</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="Enter first name">
+          <mat-error *ngIf="employeeForm.get('firstName')?.invalid">
+            {{ getErrorMessage('firstName') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Enter last name">
+          <mat-error *ngIf="employeeForm.get('lastName')?.invalid">
+            {{ getErrorMessage('lastName') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Enter email">
+          <mat-error *ngIf="employeeForm.get('email')?.invalid">
+            {{ getErrorMessage('email') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Department</mat-label>
+          <mat-select formControlName="department" placeholder="Select department">
+            <mat-option *ngFor="let dept of departments" [value]="dept">
+              {{ dept }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="employeeForm.get('department')?.invalid">
+            {{ getErrorMessage('department') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Date of Joining</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateOfJoining" placeholder="Select date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="employeeForm.get('dateOfJoining')?.invalid">
+            {{ getErrorMessage('dateOfJoining') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!employeeForm.valid">
+          Add Employee
+        </button>
+        <button mat-button type="button" (click)="employeeForm.reset()">
+          Clear
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
