@@ -11,5 +11,5 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Employee Dashboard';
+  readonly title = 'Employee Dashboard';
 }
